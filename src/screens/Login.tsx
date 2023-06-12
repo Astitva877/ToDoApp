@@ -19,32 +19,8 @@ const Login = ({navigation}) => {
   const [emailMsg, setEmailMsg] = useState('Please Enter Email');
   const handleLogin = async () => {
     const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
-    // try {
-    //   const response = await axios.post(
-    //     'https://to-do-backend-e479vpwcf-astitva877.vercel.app/api/auth/login',
-    //     {
-    //       username: userName,
-    //       // email: email,
-    //       password: password,
-    //     },
-    //   );
 
-    //   // Handle the response from the API
-    //   console.log(response.data);
-    // } catch (error) {
-    //   if (error?.response) {
-    //     console.log('hee');
-    //     console.log(error?.response.data);
-    //     console.log(error?.response.status);
-    //     console.log(error?.response.headers);
-    //     //   } else if (error?.request) {
-    //     //     console.log('huu');
-    //     //     console.log(error?.request);
-    //   } else {
-    //     console.log('Error', error?.message);
-    //   }
-    // }
-    // navigation.navigate('Home');
+    navigation.navigate('Home');
     if (userName === '') {
       setNameError(true);
     } else if (email === '') {
@@ -62,9 +38,19 @@ const Login = ({navigation}) => {
       setNameError(false);
       setEmailError(false);
       setPasswordError(false);
-      if (userName === 'astitva' && password === '123456') {
-        navigation.navigate('Home');
-      } else {
+      try {
+        const response = await axios.post(
+          'https://to-do-backend-e479vpwcf-astitva877.vercel.app/api/auth/login',
+          {
+            username: userName,
+            email: email,
+            password: password,
+          },
+        );
+
+        // Handle the response from the API
+        console.log(response.data);
+      } catch (error) {
         Alert.alert(
           'Something went wrong, please try again with right credentials',
         );
