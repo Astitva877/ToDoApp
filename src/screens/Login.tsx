@@ -50,6 +50,8 @@ const Login = ({navigation}) => {
 
         // Handle the response from the API
         console.log(response.data);
+
+        
       } catch (error) {
         Alert.alert(
           'Something went wrong, please try again with right credentials',
